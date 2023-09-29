@@ -71,6 +71,32 @@ toastr.options = {
     // "rtl": true
 };
 
+function passFormatValider (password) {
+    let bool = { error: false, message: ""};
+    if (password.length >= 8) {
+        if (RegExp("[0-9]").test(password)) {
+            if (RegExp("[a-z]").test(password)) {
+                if (RegExp("[A-Z]").test(password)) {
+                    bool.error = false;
+                } else {
+                    bool.error = true;
+                    bool.message = "Le mot de passe doit comporté au moins une lettre majiscule.";
+                }
+            } else {
+                bool.error = true;
+                bool.message = "Le mot de passe doit comporté au moins une lettre miniscule.";
+            }
+        } else {
+            bool.error = true;
+            bool.message = "Le mot de passe doit comporté au moins un chiffre.";
+        }
+    } else {
+        bool.error = true;
+        bool.message = "Le mot de passe doit comporté au moins 8 caractaires.";
+    }
+    return bool;
+}
+
 function success_toastr(message) {
     toastr.success(message);
 }
