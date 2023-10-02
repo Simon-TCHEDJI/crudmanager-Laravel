@@ -17,7 +17,12 @@ loginBtn.onclick = (e) => {
     document.querySelector("#nameSignIn").value = "";
     document.querySelector("#passSignIn").value = "";
     if (loginData.pass !== "" && loginData.username !== "") {
+        let verif = passFormatValider(loginData);
+        if (verif.error === false) {
 
+        } else {
+            error_toastr(verif.message);
+        }
     } else {
         info_toastr("Les champs sont obligatoires.");
     }
